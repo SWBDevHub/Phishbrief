@@ -20,8 +20,8 @@ Phishing analysis is time-consuming and inconsistent. Non-specialist staff often
 
 ## Demo
 
-![PhishBrief input page](https://raw.githubusercontent.com/SWBDevHub/Phishbrief/main/static/screenshots/input.png)
-![PhishBrief result page](https://raw.githubusercontent.com/SWBDevHub/Phishbrief/main/static/screenshots/result.png)
+![PhishBrief input page](https://raw.githubusercontent.com/SWBDevHub/Phishbrief/main/static/Screenshots/input.png)
+![PhishBrief result page](https://raw.githubusercontent.com/SWBDevHub/Phishbrief/main/static/Screenshots/result.png)
 
 ## Tech stack
 
