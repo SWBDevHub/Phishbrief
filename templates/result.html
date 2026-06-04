@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishBrief — Triage Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">PhishBrief</div>
+            <p class="tagline">Triage Result</p>
+        </header>
+
+        <!-- Verdict banner -->
+        <div class="verdict-banner verdict-{{ result.verdict | replace('_', '-') }}">
+            <div class="verdict-left">
+                <div class="verdict-label">Verdict</div>
+                <div class="verdict-value">{{ result.verdict | replace('_', ' ') | title }}</div>
+            </div>
+            <div class="verdict-right">
+                <div class="risk-score-label">Risk Score</div>
+                <div class="risk-score-value">{{ result.risk_score }}<span>/100</span></div>
+                <div class="confidence-badge confidence-{{ result.confidence }}">{{ result.confidence | title }} confidence</div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="card">
+            <div class="card-title">Summary</div>
+            <p class="summary-text">{{ result.summary }}</p>
+        </div>
+
+        <!-- Two column grid -->
+        <div class="grid-2">
+            <!-- Key indicators -->
+            <div class="card">
+                <div class="card-title">Key Indicators</div>
+                {% if result.key_indicators %}
+                <ul class="indicator-list">
+                    {% for item in result.key_indicators %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="muted">No key indicators identified.</p>
+                {% endif %}
+            </div>
+
+            <!-- Technical signals -->
+            <div class="card">
+                <div class="card-title">Technical Signals</div>
+                {% if result.technical_signals %}
+                <ul class="indicator-list">
+                    {% for item in result.technical_signals %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="muted">No technical signals identified.</p>
+                {% endif %}
+            </div>
+
+            <!-- Social engineering -->
+            <div class="card">
+                <div class="card-title">Social Engineering Tactics</div>
+                {% if result.social_engineering_tactics %}
+                <div class="tag-list">
+                    {% for tactic in result.social_engineering_tactics %}
+                    <span class="tag">{{ tactic }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="muted">No social engineering tactics identified.</p>
+                {% endif %}
+            </div>
+
+            <!-- False positive cautions -->
+            <div class="card">
+                <div class="card-title">False Positive Cautions</div>
+                {% if result.false_positive_cautions %}
+                <ul class="indicator-list muted-list">
+                    {% for item in result.false_positive_cautions %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="muted">No false positive concerns noted.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Recommended actions -->
+        <div class="card">
+            <div class="card-title">Recommended Actions</div>
+            {% if result.recommended_actions %}
+            <ol class="action-list">
+                {% for action in result.recommended_actions %}
+                <li>{{ action }}</li>
+                {% endfor %}
+            </ol>
+            {% endif %}
+        </div>
+
+        <!-- Escalation note -->
+        <div class="card escalation-card">
+            <div class="card-title">Escalation Note</div>
+            <p>{{ result.escalation_note }}</p>
+        </div>
+
+        <div class="actions-row">
+            <a href="/" class="btn-primary">Analyse another email →</a>
+        </div>
+
+        <footer>
+            <p>⚠ PhishBrief provides AI-assisted triage only. Always verify findings before taking action. Not a substitute for professional security review.</p>
+        </footer>
+    </div>
+</body>
+</html>

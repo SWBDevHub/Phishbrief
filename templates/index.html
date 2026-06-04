@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishBrief — Email Triage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">PhishBrief</div>
+            <p class="tagline">AI-assisted phishing triage. Paste an email. Get a verdict.</p>
+        </header>
+
+        {% if error %}
+        <div class="error-banner">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/analyse">
+            <div class="field">
+                <label for="email_content">Email content or headers</label>
+                <textarea
+                    id="email_content"
+                    name="email_content"
+                    rows="14"
+                    placeholder="Paste the full email here — headers, body, or both..."
+                    required
+                ></textarea>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label for="sender_domain">Sender domain <span class="optional">(optional)</span></label>
+                    <input type="text" id="sender_domain" name="sender_domain" placeholder="e.g. paypa1-support.com">
+                </div>
+                <div class="field">
+                    <label for="org_type">Organisation type <span class="optional">(optional)</span></label>
+                    <input type="text" id="org_type" name="org_type" placeholder="e.g. financial services, NHS trust">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Analyse Email →</button>
+        </form>
+
+        <footer>
+            <p>⚠ PhishBrief provides AI-assisted triage only. Always verify findings before taking action. Not a substitute for professional security review.</p>
+        </footer>
+    </div>
+</body>
+</html>
